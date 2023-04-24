@@ -1,1 +1,31 @@
-<p>我爱王烁敏</p>
+html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>输液时间计算器</title>
+</head>
+<body>
+
+<h1>输液时间计算器</h1>
+<p>本计算器可以帮助你计算输液所需的时间。</p>
+
+<form>
+<label>输液量(毫升): <input type="number" id="volume"></label><br> 
+<label>流量(毫升/小时): <input type="number" id="flowrate"></label><br>
+<button type="button" onclick="calculate()">计算时间</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+function calculate() {
+  let volume = document.getElementById("volume").value;
+  let flowrate = document.getElementById("flowrate").value;
+  let time = volume / flowrate;
+  document.getElementById("result").innerHTML = "输液所需时间是:" + time + " 小时";  
+}
+</script>
+
+</body>
+</html>
