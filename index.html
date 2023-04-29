@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column; 
+  width: 50%;
+  margin: 1rem;
+}
+
+input, label {
+  width: 100%;
+  padding: 0.5rem;
+}  
+
+button {
+  width: 50%;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+p {
+  width: 50%;
+  padding: 0.5rem; 
+}
+
+/* 响应式规则 */
+@media (min-width: 768px) {
+  .input-group {
+    width: 25%; 
+  }
+  
+  button, p {
+    width: 25%;
+  }  
+}  
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>输血时间计算器</h1>
+
+<p></p>  
+总量(ml): <input id="total_volume"></p>  
+第一阶段输血时间(min): <input id="time1">  </p>  
+点滴系数: <input id="gtt_rate">  </p>  
+
+<p>第一阶段: </p>  
+第一阶段输液滴速(滴/min): <input id="drip_rate1">   
+
+<p>第二阶段: </p>
+第二阶段输液滴速(滴/min): <input id="drip_rate2">  
+
+</p>
+<button onclick="calculate()">计算</button>  
+<p id="result1"></p>
+<p id="result2"></p>
+<p id="total_time"></p>
+
+<script>
+function calculate() {
+  var total_volume = document.getElementById("total_volume").value;
+  var time1 = document.getElementById("time1").value;
+  var gtt_rate = document.getElementById("gtt_rate").value;
+  var drip_rate1 = document.getElementById("drip_rate1").value;
+  
+  var infused_volume1 = (time1 * drip_rate1) / gtt_rate;  
+  var infused_volume2 = total_volume - infused_volume1;
+  
+  var drip_rate2 = document.getElementById("drip_rate2").value;
+  var time2 = (infused_volume2 * gtt_rate) / drip_rate2;   
+  
+  document.getElementById("result1").innerHTML = "第一阶段时间: " + time1 + " 分钟";
+  document.getElementById("result2").innerHTML = "第二阶段时间: " + time2 + " 分钟"; 
+  document.getElementById("total_time").innerHTML = "总时间: " + (Number(time1) + Number(time2)) + " 分钟"; 
+}
+</script>
+
+</body>
+</html>
